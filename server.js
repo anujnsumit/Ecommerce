@@ -14,10 +14,11 @@ dbConnect();
 
 // middleware
 app.use(express.json());
-app.use(morgan('dev'))
+// app.use(morgan('dev'))
 
 // Routes
 app.use('/api/v1/auth',router);
 
 const PORT=process.env.PORT || 8080;
+
 app.listen(PORT,()=>console.log(`sever is running at ${PORT} enviorment ${process.env.NODE_ENV}`.bgCyan.white))

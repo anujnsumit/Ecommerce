@@ -26,8 +26,7 @@ const UserSchema=new mongoose.Schema({
     role:{
         type:Number,
         default:0
-    },
-    createdAt:Date.now()
-} ,{timestamps:true})
+    }
+},{timestamps:true})
 
 export default mongoose.model("users",UserSchema);

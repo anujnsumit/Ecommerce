@@ -1,0 +1,35 @@
+{
+  "name": "Ecommerce",
+  "version": "1.0.0",
+  "description": "ecommerce mern app",
+  "main": "server/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production nodemon index",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anujnsumit/Ecommerce.git"
+  },
+  "keywords": [],
+  "author": "anujn@sumit",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anujnsumit/Ecommerce/issues"
+  },
+  "homepage": "https://github.com/anujnsumit/Ecommerce#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.22"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}

@@ -56,7 +56,7 @@ const userLoginController=async(req,res)=>{
          return res.status(200).json({success:true,message:"user not found"})
       }
       // create token
-      const token=await JWT.sign({ _id: user._id }, process.env.JWT_SECRET,{expiresIn:'7d'});
+      const token=JWT.sign({ _id: user._id }, process.env.JWT_SECRET,{expiresIn:'7d'});
       res.status(201).json({success:true,message:"login successfull",user:{
          name:user.name,
          email:user.email,

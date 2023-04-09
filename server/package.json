@@ -2,11 +2,11 @@
   "name": "Ecommerce",
   "version": "1.0.0",
   "description": "ecommerce mern app",
-  "main": "server.js",
+  "main": "server/index.js",
   "type": "module",
   "scripts": {
-    "start": "cross-env NODE_ENV=production nodemon server",
-    "dev": "nodemon server"
+    "start": "cross-env NODE_ENV=production nodemon index",
+    "dev": "nodemon index"
   },
   "repository": {
     "type": "git",

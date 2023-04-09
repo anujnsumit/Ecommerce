@@ -1,24 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import {Routes,Route} from 'react-router-dom';
+import { lazyLoadRoutes } from "./utils/lazyload";
 
-function App() {
+ function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <>
+   <Routes>
+      <Route path='/' element={lazyLoadRoutes("Home")}/>
+      <Route path='/about' element={lazyLoadRoutes("About")}/>
+      <Route path='/contact' element={lazyLoadRoutes("Contact")}/>
+      <Route path='/policy' element={lazyLoadRoutes("Policy")}/>
+      <Route path='*' element={lazyLoadRoutes("pageNotFound")}/>
+   </Routes>
+   </>
   );
 }
 

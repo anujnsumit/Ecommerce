@@ -25,4 +25,4 @@ const About = () => {
   )
 }
 
-export default WithLayout(About);
+export default WithLayout(About,"About");

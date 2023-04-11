@@ -31,4 +31,4 @@ const Contact = () => {
   )
 }
 
-export default WithLayout(Contact)
+export default WithLayout(Contact,"Contact")

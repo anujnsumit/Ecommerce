@@ -7,4 +7,4 @@ const Home = () => {
   )
 }
 
-export default WithLayout(Home)
+export default WithLayout(Home,"Home");

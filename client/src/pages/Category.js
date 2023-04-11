@@ -7,4 +7,4 @@ const Category = () => {
   )
 }
 
-export default WithLayout(Category);
+export default WithLayout(Category,"Category");

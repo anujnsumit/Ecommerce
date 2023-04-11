@@ -24,4 +24,4 @@ const Policy = () => {
   )
 }
 
-export default WithLayout(Policy)
+export default WithLayout(Policy,"Policy")

@@ -7,4 +7,4 @@ const Register = () => {
   )
 }
 
-export default WithLayout(Register);
+export default WithLayout(Register,"Register");

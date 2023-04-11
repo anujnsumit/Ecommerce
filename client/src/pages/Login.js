@@ -7,4 +7,4 @@ const Login = () => {
   )
 }
 
-export default WithLayout(Login);
+export default WithLayout(Login,"Login");

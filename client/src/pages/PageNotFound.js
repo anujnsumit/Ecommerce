@@ -12,4 +12,4 @@ const PageNotFound = () => {
   )
 }
 
-export default WithLayout(PageNotFound)
+export default WithLayout(PageNotFound,"Page Not Found")

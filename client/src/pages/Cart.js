@@ -7,4 +7,4 @@ const Cart = () => {
   )
 }
 
-export default WithLayout(Cart);
+export default WithLayout(Cart,"Cart");

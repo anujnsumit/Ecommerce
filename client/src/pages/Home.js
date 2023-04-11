@@ -3,7 +3,7 @@ import WithLayout from '../component/Layout/Layout'
 
 const Home = () => {
   return (
-    <>Home</>
+    <main style={{minHeight:"70vh"}}>Home</main>
   )
 }
 

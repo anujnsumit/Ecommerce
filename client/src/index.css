@@ -8,3 +8,71 @@
 
 /* font-family: 'Poppins', sans-serif; */
 /* font-family: 'Playfair Display', serif; */
+
+.navbar{
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  line-height: 26px;
+  text-transform: uppercase;
+  box-shadow: 0px 8px 6px -6px grey;
+  -webkit-box-shadow: 0px 8px 6px -6px grey;
+}
+
+.nav-link{
+  font-weight: 300 !important;
+}
+
+.active{
+  border-bottom: 1px solid black;
+}
+
+.navbar-brand{
+  font-weight: 700;
+font-family:'roboto',sans-serif;
+letter-spacing: 3px;
+}
+
+.footer{
+  color: white;
+  padding: 25px;
+  background: #000000;
+  background: -webkit-linear-gradient(to right,#434343,#000000);
+  background: linear-gradient(to right,#434343,#000000);
+}
+.footer a{
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+}
+.footer a:hover{
+  color:#ffefbe;
+  border-bottom: 1px solid #ffefbe;
+}
+.pnf{
+  display: flex;
+  min-height: 65vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.pnf-title{
+  font-size: 100px;
+  font-weight: 700;
+}
+.pnf-heading{
+  font-weight: normal;
+}
+.pnf-btn{
+  color: black;
+  border: 1px solid black;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+
+.pnf-btn:hover{
+  background-color: #000000;
+  color: white;
+  transition: 1s;
+}

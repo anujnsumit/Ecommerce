@@ -1,9 +1,6 @@
 import React from 'react'
 
-const Loading = ({ error }) => {
-   if(error){
-    return <>Error</>;
-   }
+const Loading = () => {
   return (
     <div>Loading....</div>
   )

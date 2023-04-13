@@ -1,7 +1,10 @@
-import React from 'react'
 import Header from './Header'
-import Footer from './Footer'
+import Footer from './Footer';
+// Seo purpose
 import { Helmet } from "react-helmet";
+// Toast
+import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const WithLayout = (Component, title) => (props) => {
   return (
@@ -14,6 +17,7 @@ const WithLayout = (Component, title) => (props) => {
         <title>{title}</title>
       </Helmet>
       <Header />
+      <ToastContainer/>
       <Component {...props} />
       <Footer />
     </div>

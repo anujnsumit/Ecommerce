@@ -86,3 +86,11 @@ letter-spacing: 3px;
   align-items: center;
   justify-content: center;
 }
+
+
+.register{
+  display: flex;
+  flex-direction: column;
+  min-height: 70vh;
+  align-items: center;
+}

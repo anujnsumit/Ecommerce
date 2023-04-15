@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import WithLayout from '../component/Layout/Layout';
-import {toast } from 'react-toastify';
+import { registerUserService } from '../services/auth/registerService';
+import { useNavigate } from 'react-router-dom';
+import "../styles/AuthStyles.css";
 
 const registerInitial = {
   name: "",
@@ -11,22 +13,23 @@ const registerInitial = {
 }
 
 const Register = () => {
-
   const [registerUser, setRegisterUser] = useState(registerInitial);
+  const navigate=useNavigate()
   const { name, email, password, phone, address } = registerUser;
 
   const handleChage=({target:{value,name}})=>{
       setRegisterUser({...registerUser,[name]:value})
   }
 
-const handleSubmit=(e)=>{
+const handleSubmit=async(e)=>{
   e.preventDefault();
-  toast.success("Wow so easy!");
+  registerUserService(registerUser);
+  navigate("/login");
 }
 
   return (
-    <div className='register'>
-      <h1>Register Page</h1>
+    <div className="form-container">
+       <h4 className="title">REGISTER FORM</h4>
       <form onSubmit={handleSubmit}>
         <div class="mb-3">
           <input type="text"

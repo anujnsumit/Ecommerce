@@ -1,6 +1,9 @@
-import React from 'react'
-import WithLayout from '../component/Layout/Layout'
+import React from 'react';
 import {BiMailSend,BiPhoneCall,BiSupport} from "react-icons/bi";
+
+// Component
+import WithLayout from '../component/Layout/Layout';
+
 const Contact = () => {
   return (
     <div className="row contactus ">

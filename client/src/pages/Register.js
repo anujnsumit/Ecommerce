@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import WithLayout from '../component/Layout/Layout';
-import { registerUserService } from '../services/auth/registerService';
 import { useNavigate } from 'react-router-dom';
+// Component
+import { registerUserService } from '../services/auth/registerService';
+import WithLayout from '../component/Layout/Layout';
+// Css
 import "../styles/AuthStyles.css";
 
 const registerInitial = {
@@ -29,7 +31,7 @@ const handleSubmit=async(e)=>{
 
   return (
     <div className="form-container">
-       <h4 className="title">REGISTER FORM</h4>
+       <h4 className="title">REGISTER</h4>
       <form onSubmit={handleSubmit}>
         <div class="mb-3">
           <input type="text"

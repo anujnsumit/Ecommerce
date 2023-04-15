@@ -1,4 +1,5 @@
 import React from 'react'
+// Component
 import WithLayout from '../component/Layout/Layout'
 
 const Policy = () => {

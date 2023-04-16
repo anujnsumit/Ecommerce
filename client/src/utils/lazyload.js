@@ -6,8 +6,16 @@ export function lazyLoadRoutes(componentName) {
     loader:() => import(`../pages/${componentName}.js`),
     loading:Loading
   })
-  
+  return (
+      <LazyElement />
+  );
+}
 
+export function lazyLoadPrivateRoutes(componentName) {
+  const LazyElement =loadable({
+    loader:() => import(`../pages/user/${componentName}.js`),
+    loading:Loading
+  })
   return (
       <LazyElement />
   );

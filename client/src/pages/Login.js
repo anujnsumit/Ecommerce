@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useLocation} from 'react-router-dom';
 
 // Component
 import { loginUserService } from '../services/auth/loginService';
@@ -9,7 +9,6 @@ import WithLayout from '../component/Layout/Layout';
 import "../styles/AuthStyles.css";
 import { useAuth } from '../context/auth';
 
-
 const loginInitial = {
   email: "",
   password: ""
@@ -18,6 +17,7 @@ const loginInitial = {
 const Login = () => {
   const [loginUser, setLoginUser] = useState(loginInitial);
   const navigate = useNavigate();
+  const location=useLocation();
   const [auth,setAuth]=useAuth();
 
   const { email, password } = loginUser;
@@ -30,10 +30,12 @@ const Login = () => {
     e.preventDefault();
    const resp=await loginUserService(loginUser);
    const {data:{user,token}}=resp;
-   setAuth({...auth,user:user,token:token})
+   setAuth({...auth,user,token})
    localStorage.setItem("auth",JSON.stringify(resp.data));
-    navigate("/");
+   console.log(location);
+    navigate(location.state || "/");
   }
+
   return (
     <div className="form-container">
       <h4 className="title">Login</h4>

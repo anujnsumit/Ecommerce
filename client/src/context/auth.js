@@ -11,11 +11,12 @@ const AuthProvider=({children})=>{
             const {user,token}=JSON.parse(data);
             setAuth({
                 ...auth,
-                user:(user),
-                token:JSON.parse(token)
+               user,
+               token
             })
         }
-    },[auth])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     return (
         <AuthContext.Provider value={[auth,setAuth]}>

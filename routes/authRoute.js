@@ -17,5 +17,10 @@ router.post('/login',userLoginController);
 // Protect Route
 router.get('/test',requireSignIn,isAdmin,testController);
 
+// Protect Route
+router.get('/user-auth',requireSignIn,(req,res)=>{
+     res.status(200).send({ok:true})
+});
+
 
 export default router;

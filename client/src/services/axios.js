@@ -11,9 +11,9 @@ const Service = axios.create({
 
 Service.interceptors.request.use(
     config => {
-        const accessToken = localStorage.getItem('accessToken');
-        if (accessToken) {
-            config.headers.common = { Authorization: `Bearer ${accessToken}` };
+        const accessToken = localStorage.getItem('auth');
+        if (accessToken?.token) {
+            config.headers.common = { Authorization: accessToken?.token };
         }
         return config;
     },

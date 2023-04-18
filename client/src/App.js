@@ -15,6 +15,7 @@ import Dashboard from './pages/user/Dashboard';
       <Route path='/category' element={lazyLoadRoutes("Category")}/>
       <Route path='/register' element={lazyLoadRoutes("Register")}/>
       <Route path='/login' element={lazyLoadRoutes("Login")}/>
+      <Route path='/forgot-password' element={lazyLoadRoutes("ForgotPassword")}/>
       <Route path='/cart' element={lazyLoadRoutes("Cart")}/>
          {/* private route */}
       <Route path='/dashboard' element={<PrivateRoutes/>}>

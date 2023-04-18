@@ -11,13 +11,14 @@ const registerInitial = {
   email: "",
   password: '',
   phone: '',
-  address: ""
+  address: "",
+  answer:""
 }
 
 const Register = () => {
   const [registerUser, setRegisterUser] = useState(registerInitial);
   const navigate=useNavigate()
-  const { name, email, password, phone, address } = registerUser;
+  const { name, email, password, phone, address,answer} = registerUser;
 
   const handleChage=({target:{value,name}})=>{
       setRegisterUser({...registerUser,[name]:value})
@@ -89,6 +90,17 @@ const handleSubmit=async(e)=>{
             name="address"
             id="exampleInputAddress"
             placeholder='Enter Your Address'
+            required
+            />
+        </div>
+        <div class="mb-3">
+          <input type="text"
+            class="form-control"
+            value={answer}
+            onChange={handleChage}
+            name="answer"
+            id="exampleInputAnswer"
+            placeholder='What is your favourite sport'
             required
             />
         </div>

@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+     forgotPasswordController,
      registerController,
      testController,
      userLoginController } from '../controller/authController.js';
@@ -10,6 +11,10 @@ const router=express.Router();
 
 // User Registration Route
 router.post('/register',registerController);
+
+
+// forgot password
+router.post("/forgot-password",forgotPasswordController);
 
 // Login Route
 router.post('/login',userLoginController);

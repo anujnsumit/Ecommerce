@@ -14,4 +14,19 @@ const loginUserService=async(params)=>{
         toast.error("Something went wrong!");
     }
 }
-export {loginUserService};
+
+const forgotPasswordService=async(params)=>{
+    try {
+       const response=await Service.post('/api/v1/auth/forgot-password',{...params});
+       if(response?.data?.success){
+        toast.success("reset password successfully!");
+       }else{
+        toast.error(response?.data?.message);
+       }
+       return response;
+    } catch{
+        toast.error("Something went wrong!");
+    }
+}
+
+export {loginUserService,forgotPasswordService};

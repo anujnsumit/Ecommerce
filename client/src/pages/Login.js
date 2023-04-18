@@ -32,7 +32,6 @@ const Login = () => {
    const {data:{user,token}}=resp;
    setAuth({...auth,user,token})
    localStorage.setItem("auth",JSON.stringify(resp.data));
-   console.log(location);
     navigate(location.state || "/");
   }
 
@@ -62,9 +61,17 @@ const Login = () => {
             required
           />
         </div>
+        <div class="mb-3">
+        <button
+          type="submit"
+          class="btn btn-primary" onClick={()=>navigate("/forgot-password")}>
+            Forgot Password</button>
+          </div>
+          <div class="mb-3">
         <button
           type="submit"
           class="btn btn-primary">Submit</button>
+        </div>
       </form>
     </div>
   )

@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import Service from '../axios';
 
-const loginCheckService=async()=>{
+const userCheckService=async()=>{
     try {
        const response=await Service.get('api/v1/auth/user-auth');
        return response;
@@ -9,4 +9,14 @@ const loginCheckService=async()=>{
         toast.error("Something went wrong!");
     }
 }
-export {loginCheckService};
+
+const adminCheckService=async()=>{
+    try {
+       const response=await Service.get('api/v1/auth/admin-auth');
+       return response;
+    } catch{
+        toast.error("Something went wrong!");
+    }
+}
+
+export {userCheckService,adminCheckService};

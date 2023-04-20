@@ -11,9 +11,10 @@ const Service = axios.create({
 
 Service.interceptors.request.use(
     config => {
-        const accessToken = localStorage.getItem('auth');
+        const accessToken = JSON.parse(localStorage.getItem('auth'));
+        console.log(accessToken,accessToken?.token)
         if (accessToken?.token) {
-            config.headers.common = { Authorization: accessToken?.token };
+            config.headers ={ Authorization: accessToken?.token };
         }
         return config;
     },

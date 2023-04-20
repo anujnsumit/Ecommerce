@@ -2,7 +2,7 @@ import {Routes,Route} from 'react-router-dom';
 import { lazyLoadRoutes,lazyLoadPrivateRoutes } from "./utils/lazyload";
 import PageNotFound from './pages/PageNotFound';
 import PrivateRoutes from './component/Routes/PrivateRoute';
-import Dashboard from './pages/user/Dashboard';
+import AdminRoutes from './component/Routes/AdminRoute';
 
  function App() {
   return (
@@ -19,7 +19,11 @@ import Dashboard from './pages/user/Dashboard';
       <Route path='/cart' element={lazyLoadRoutes("Cart")}/>
          {/* private route */}
       <Route path='/dashboard' element={<PrivateRoutes/>}>
-         <Route path='/dashboard' element={lazyLoadPrivateRoutes("Dashboard")}/>
+         <Route path='user' element={lazyLoadPrivateRoutes("Dashboard")}/>
+      </Route>
+      {/* Admin Route */}
+      <Route path='/dashboard' element={<AdminRoutes/>}>
+         <Route path='admin' element={lazyLoadPrivateRoutes("AdminDashboard")}/>
       </Route>
 
       <Route path='*' element={<PageNotFound/>}/>

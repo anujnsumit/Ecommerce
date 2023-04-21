@@ -4,7 +4,7 @@ import JWT from 'jsonwebtoken';
 
 const registerController=async(req,res)=>{
    try {
-      const {name,email,password,address,phone}=req.body;
+      const {name,email,password,address,phone,answer}=req.body;
       // validation
       if(!name){
          return res.send({error:"name is required"})
@@ -21,6 +21,9 @@ const registerController=async(req,res)=>{
       if(!phone){
          return res.send({error:"phone is required"})
       }
+      if(!answer){
+         return res.send({error:"answer is required"})
+      }
       // exiting user
       const exitingUser=await userModel.findOne({email});
       if(exitingUser){
@@ -29,7 +32,7 @@ const registerController=async(req,res)=>{
       // register user
       const hasedPassword=await hashPassword(password);
       // save user
-      const users=await new userModel({name,email,password:hasedPassword,phone,address}).save();
+      const users=await new userModel({name,email,password:hasedPassword,phone,address,answer}).save();
       res.status(201).send({success:true,message:'user register successfully',users})
    } catch (error) {
       console.log("error",error);
@@ -61,7 +64,8 @@ const userLoginController=async(req,res)=>{
          name:user.name,
          email:user.email,
          phone:user.phone,
-         address:user.address
+         address:user.address,
+         role:user.role
       },
       token
    })
@@ -71,8 +75,47 @@ const userLoginController=async(req,res)=>{
    }
 }
 
+const forgotPasswordController = async (req, res) => {
+   try {
+     const { email, answer, newPassword } = req.body;
+     if (!email) {
+       res.status(400).send({ message: "Emai is required" });
+     }
+     if (!answer) {
+       res.status(400).send({ message: "answer is required" });
+     }
+     if (!newPassword) {
+       res.status(400).send({ message: "New Password is required" });
+     }
+     //check
+     const user = await userModel.findOne({ email, answer });
+     //validation
+     if (!user) {
+       return res.status(404).send({
+         success: false,
+         message: "Wrong Email Or Answer",
+       });
+     }
+     const hashed = await hashPassword(newPassword);
+     await userModel.findByIdAndUpdate(user._id, { password: hashed });
+     res.status(200).send({
+       success: true,
+       message: "Password Reset Successfully",
+     });
+   } catch (error) {
+     console.log(error);
+     res.status(500).send({
+       success: false,
+       message: "Something went wrong",
+       error,
+     });
+   }
+ };
+
 const testController=async(req,res)=>{
 console.log("protected route");
 }
 
-export {registerController,userLoginController,testController};
+
+
+export {registerController,userLoginController,testController,forgotPasswordController};

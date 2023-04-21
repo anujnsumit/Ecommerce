@@ -1,11 +1,8 @@
-import React from 'react'
+import Spinner from '../Spinner';
 
-const Loading = ({ error }) => {
-   if(error){
-    return <>Error</>;
-   }
+const Loading = () => {
   return (
-    <div>Loading....</div>
+    <Spinner/>
   )
 }
 

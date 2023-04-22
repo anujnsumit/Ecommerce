@@ -27,6 +27,6 @@ export default function PrivateRoute() {
     if (!isLogin?.token) {
         return (<Navigate to="/login" state={location?.pathname} />);
       }
-
+      
     return ok ? <Outlet /> : <Loading />;
 }

@@ -27,10 +27,5 @@ export default function AdminRoute() {
   if (!isLogin?.token) {
     return (<Navigate to="/login" state={location?.pathname} />);
   }
-
-  if (isLogin?.token && isLogin.role!==1) {
-    return (<Navigate to="/login" state={location?.pathname} />);
-  }
-  
   return ok ? <Outlet /> : <Loading />;
 }

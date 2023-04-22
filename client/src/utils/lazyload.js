@@ -20,3 +20,13 @@ export function lazyLoadPrivateRoutes(componentName) {
       <LazyElement />
   );
 }
+
+export function lazyLoadAdminRoutes(componentName) {
+  const LazyElement =loadable({
+    loader:() => import(`../pages/Admin/${componentName}.js`),
+    loading:Loading
+  })
+  return (
+      <LazyElement />
+  );
+}

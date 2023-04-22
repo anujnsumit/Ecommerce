@@ -112,6 +112,7 @@ const forgotPasswordController = async (req, res) => {
    }
  };
 
+ 
 const testController=async(req,res)=>{
 console.log("protected route");
 }

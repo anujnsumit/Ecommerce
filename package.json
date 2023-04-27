@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/anujnsumit/Ecommerce#readme",
   "dependencies": {
-    "antd": "^5.4.6",
     "bcrypt": "^5.1.0",
     "colors": "^1.4.0",
     "concurrently": "^8.0.1",

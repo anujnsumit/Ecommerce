@@ -39,14 +39,14 @@ export const updateCategoryController = async (req, res) => {
         const { name } = req.body;
         const { id } = req.params;
         const category = await categoryModel.findByIdAndUpdate(id, { name, slug: slugify(name) }, { new: true });
-        req.status(200).send({
+        res.status(200).send({
             success: true,
             message: "Category Updated Successfully",
             category
         })
     } catch (error) {
         console.log("first")
-        req.status(500).send({
+        res.status(500).send({
             success: false,
             message: "Category Not Updated ",
             error
@@ -90,7 +90,7 @@ export const singleCategoryController = async (req, res) => {
 export const deleteCategoryController = async (req, res) => {
     try {
         const { id } = req.params;
-        await categoryModel.findByIdAndDelete({ id })
+        await categoryModel.findByIdAndDelete(id)
         res.status(200).send({ success: true, message: "Category Deleted Successfully" });
     } catch (error) {
         console.log(error);

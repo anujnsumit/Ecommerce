@@ -14,7 +14,6 @@ export const createCategoryController = async (req, res) => {
         message: "Category Already Exisits",
       });
     }
-    console.log("first")
     const category = await new categoryModel({
       name,
       slug: slugify(name),
@@ -45,7 +44,6 @@ export const updateCategoryController = async (req, res) => {
             category
         })
     } catch (error) {
-        console.log("first")
         res.status(500).send({
             success: false,
             message: "Category Not Updated ",

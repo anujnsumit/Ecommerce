@@ -11,7 +11,6 @@ export const adminCatrgoryService=async()=>{
 }
 
 export const addCategoryService=async(data)=>{
-    console.log(data,'data')
     try {
        const response=await Service.post('/api/v1/category/create-category',data);
        return response;

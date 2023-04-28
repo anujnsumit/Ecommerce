@@ -116,3 +116,8 @@ letter-spacing: 3px;
   color: white;
   padding: 20px 0px;
 }
+
+.product-link{
+  text-decoration: none;
+  color: #000000;
+}

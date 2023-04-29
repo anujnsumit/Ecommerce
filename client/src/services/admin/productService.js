@@ -46,3 +46,12 @@ export const deleteProductService=async(pid)=>{
     }
 }
 
+export const filterProductService=async(data)=>{
+    try {
+       const response=await Service.post(`/api/v1/product/product-filters`,data);
+       return response;
+    } catch{
+        toast.error("Something went wrong!");
+    }
+}
+

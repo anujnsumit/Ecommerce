@@ -10,7 +10,7 @@ const router=express.Router();
 router.post("/create-product",requireSignIn,isAdmin,formidable(),createProductController);
 
 // update route
-router.post("/update-product/:pid",requireSignIn,isAdmin,formidable(),updateProductController);
+router.put("/update-product/:pid",requireSignIn,isAdmin,formidable(),updateProductController);
 
 // get routes
 router.get("/get-product",getProductController);
@@ -22,7 +22,7 @@ router.get("/get-product/:slug",getSingleProductController);
 router.get("/product-photo/:pid",productPhotoController);
 
 // Delete route
-router.get("/product/:pid",productDeleteController);
+router.delete("/delete-product/:pid",productDeleteController);
 
 
 export default router;

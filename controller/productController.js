@@ -113,7 +113,7 @@ export const productDeleteController=async(req,res)=>{
     }
 }
 
-export const updateProductController=async()=>{
+export const updateProductController=async(req,res)=>{
     try {
         const { name, description, slug, price, category, quantity, shipping } = req.fields;
         const { photo } = req.files;
@@ -126,8 +126,8 @@ export const updateProductController=async()=>{
             case !quantity: return res.status(500).send({ error: "Quantity is Required" });
             case photo && photo.size > 1000000: return res.status(500).send({ error: "Photo is Required and size is greater than 1mb" });
         }
-        const products = new productModel.findByIdAndUpdate(req.params.pid,{...req.fields,slug:slugify(name)},{new:true});
-        if (photo) {
+        const products = await productModel.findByIdAndUpdate(req.params.pid,{...req.fields,slug:slugify(name)},{new:true});
+        if (photo && products?.photo?.data) {
             products.photo.data = fs.readFileSync(photo.path)
             products.photo.contentType = photo.type;
         }

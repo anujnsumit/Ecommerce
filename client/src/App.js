@@ -28,6 +28,7 @@ import AdminRoutes from './component/Routes/AdminRoute';
          <Route path='admin' element={lazyLoadAdminRoutes("AdminDashboard")}/>
          <Route path='admin/create-category' element={lazyLoadAdminRoutes("CreateCategory")}/>
          <Route path='admin/create-product' element={lazyLoadAdminRoutes("CreateProduct")}/>
+         <Route path='admin/product/:slug' element={lazyLoadAdminRoutes("UpdateProduct")}/>
          <Route path='admin/products' element={lazyLoadAdminRoutes("Products")}/>
          <Route path='admin/users' element={lazyLoadAdminRoutes("Users")}/>
       </Route>

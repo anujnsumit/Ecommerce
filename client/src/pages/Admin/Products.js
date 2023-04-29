@@ -31,7 +31,7 @@ const Products = () => {
                 <h1 className='text-center'>All Products List</h1>
                 <div className='d-flex'>
                     {Array.isArray(products) && products.map(el =>
-                        <Link to={`/dashnoard/admin/product/${el.slug}`} key={el._id} className='product-link'>
+                        <Link to={`/dashboard/admin/product/${el.slug}`} key={el._id} className='product-link'>
                             <div className="card m-2" style={{ width: "18rem" }} >
                                 <img src={`/api/v1/product/product-photo/${el._id}`} class="card-img-top" alt={el.name} />
                                 <div className="card-body">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import WithLayout from '../component/Layout/Layout';
-import { filterProductService, getProductService } from '../services/admin/productService';
+import { filterProductService, getProductListService, getProductService, getTotalCountService } from '../services/admin/productService';
 import { Checkbox, Radio } from "antd";
 import { adminCatrgoryService } from '../services/admin/categoryService';
 import { Prices } from '../component/Prices';
@@ -10,6 +10,15 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   const [price, setPrice] = useState([]);
+  const [total,setTotal]=useState(0);
+  const [page,setPage]=useState(1);
+
+
+  const getTotal=async()=>{
+    const {data}=await getTotalCountService()
+    setTotal(data?.total)
+  } 
+
 
   // get all products
   const getAllProducts = async () => {
@@ -19,6 +28,7 @@ const Home = () => {
 
   useEffect(() => {
     getAllProducts();
+    getTotal();
   }, [])
 
   const getAllCategory = async () => {
@@ -28,7 +38,7 @@ const Home = () => {
 
   useEffect(() => {
    if(!checked.length || !price.length) getAllCategory();
-
+   
   }, [checked.length,price.length])
 
 
@@ -53,6 +63,16 @@ const Home = () => {
     setChecked(all);
   };
 
+  const loadMore=async()=>{
+    const {data}=await getProductListService(page);
+    setProducts({...products,...data?.products})
+  }
+
+  useEffect(()=>{
+    if(page===1) return
+    loadMore()
+  },[page])
+
   return (
     <div className='row mt-3'>
       <div className='col-md-2'>
@@ -64,9 +84,7 @@ const Home = () => {
             </Checkbox>
           )}
         </div>
-        <div className='d-flex flex-column'>
-        <button className='btn btn-danger' onClick={()=>window.location.reload()}>RESET FILTERS</button>
-        </div>
+       
         {/* Price filter */}
         <h4 className='text-center'>Filter By Price</h4>
         <div className='d-flex flex-column mt-4'>
@@ -79,6 +97,9 @@ const Home = () => {
               </div>
             )}
           </Radio.Group>
+        </div>
+        <div className='d-flex flex-column mt-3'>
+        <button className='btn btn-danger' onClick={()=>window.location.reload()}>RESET FILTERS</button>
         </div>
       </div>
 
@@ -96,6 +117,17 @@ const Home = () => {
                 <button className='btn btn-secondary ms-1'>Add To Cart</button>
               </div>
             </div>
+          )}
+        </div>
+        <div className='m-2 p-3'>
+          {products && products.length<total && (
+            <button className='btn btn-warning'
+            onClick={(e)=>{
+              e.preventDefault(); 
+              setPage(page+1);
+              }}>
+              load more
+            </button>
           )}
         </div>
       </div>

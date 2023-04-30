@@ -19,6 +19,15 @@ export const getProductService=async()=>{
     }
 }
 
+export const getProductListService=async(page)=>{
+    try {
+       const response=await Service.get(`/api/v1/product/product-list/${page}`);
+       return response;
+    } catch{
+        toast.error("Something went wrong!");
+    }
+}
+
 export const getSingleProductService=async(params)=>{
     try {
        const response=await Service.get(`/api/v1/product/get-product/${params}`);
@@ -54,4 +63,14 @@ export const filterProductService=async(data)=>{
         toast.error("Something went wrong!");
     }
 }
+
+export const getTotalCountService=async()=>{
+    try {
+       const response=await Service.get("/api/v1/product/product-count");
+       return response;
+    } catch{
+        toast.error("Something went wrong!");
+    }
+}
+
 

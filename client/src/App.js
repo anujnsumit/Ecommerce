@@ -9,6 +9,10 @@ import AdminRoutes from './component/Routes/AdminRoute';
    <>
    <Routes>
       <Route path='/' element={lazyLoadRoutes("Home")}/>
+      <Route path='/search' element={lazyLoadRoutes("Search")}/>
+      <Route path='/categories' element={lazyLoadRoutes("Categories")}/>
+      <Route path='/category/:slug' element={lazyLoadRoutes("CategoryProduct")}/>
+      <Route path='/product/:slug' element={lazyLoadRoutes("ProductDetails")}/>
       <Route path='/about' element={lazyLoadRoutes("About")}/>
       <Route path='/contact' element={lazyLoadRoutes("Contact")}/>
       <Route path='/policy' element={lazyLoadRoutes("Policy")}/>

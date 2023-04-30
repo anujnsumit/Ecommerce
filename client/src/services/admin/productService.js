@@ -74,3 +74,30 @@ export const getTotalCountService=async()=>{
 }
 
 
+export const getSearchService=async(keyword)=>{
+    try {
+       const response=await Service.get(`/api/v1/product/search/${keyword}`);
+       return response;
+    } catch{
+        toast.error("Something went wrong!");
+    }
+}
+
+export const getRelatedProductService=async(pid,cid)=>{
+    try {
+       const response=await Service.get( `/api/v1/product/related-product/${pid}/${cid}`);
+       return response;
+    } catch{
+        toast.error("Something went wrong!");
+    }
+}
+
+export const getProductCategoryService=async(slug)=>{
+    try {
+       const response=await Service.get( `/api/v1/product/product-category/${slug}`);
+       return response;
+    } catch{
+        toast.error("Something went wrong!");
+    }
+}
+

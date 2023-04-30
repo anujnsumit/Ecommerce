@@ -4,6 +4,7 @@ import { filterProductService, getProductListService, getProductService, getTota
 import { Checkbox, Radio } from "antd";
 import { adminCatrgoryService } from '../services/admin/categoryService';
 import { Prices } from '../component/Prices';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ const Home = () => {
   const [price, setPrice] = useState([]);
   const [total,setTotal]=useState(0);
   const [page,setPage]=useState(1);
-
+  const navigate=useNavigate();
 
   const getTotal=async()=>{
     const {data}=await getTotalCountService()
@@ -113,7 +114,7 @@ const Home = () => {
                 <h5 className="card-title">{el.name}</h5>
                 <p className="card-text">{el.description}</p>
                 <p className="card-text">$ {el.price}</p>
-                <button className='btn btn-primary ms-1'>More Details</button>
+                <button className='btn btn-primary ms-1' onClick={()=>navigate(`/product/${el.slug}`)}>More Details</button>
                 <button className='btn btn-secondary ms-1'>Add To Cart</button>
               </div>
             </div>

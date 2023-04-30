@@ -1,6 +1,7 @@
  import React, { useState } from 'react'
  import { useParams, useNavigate } from "react-router-dom";
 import { getRelatedProductService, getSingleProductService } from '../services/admin/productService';
+import WithLayout from '../component/Layout/Layout';
 
  const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -114,4 +115,4 @@ useState(()=>{
    )
  }
  
- export default ProductDetails
+ export default WithLayout(ProductDetails)

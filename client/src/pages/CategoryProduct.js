@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { getProductCategoryService } from '../services/admin/productService';
+import WithLayout from '../component/Layout/Layout';
 
 const CategoryProduct = () => {
   const params = useParams();
@@ -96,4 +97,4 @@ const CategoryProduct = () => {
   )
 }
 
-export default CategoryProduct;
+export default WithLayout(CategoryProduct);

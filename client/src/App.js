@@ -12,6 +12,7 @@ import AdminRoutes from './component/Routes/AdminRoute';
       <Route path='/search' element={lazyLoadRoutes("Search")}/>
       <Route path='/categories' element={lazyLoadRoutes("Categories")}/>
       <Route path='/category/:slug' element={lazyLoadRoutes("CategoryProduct")}/>
+      <Route path='/cart' element={lazyLoadRoutes("CartPage")}/>
       <Route path='/product/:slug' element={lazyLoadRoutes("ProductDetails")}/>
       <Route path='/about' element={lazyLoadRoutes("About")}/>
       <Route path='/contact' element={lazyLoadRoutes("Contact")}/>
@@ -20,7 +21,6 @@ import AdminRoutes from './component/Routes/AdminRoute';
       <Route path='/register' element={lazyLoadRoutes("Register")}/>
       <Route path='/login' element={lazyLoadRoutes("Login")}/>
       <Route path='/forgot-password' element={lazyLoadRoutes("ForgotPassword")}/>
-      <Route path='/cart' element={lazyLoadRoutes("Cart")}/>
          {/* private route */}
       <Route path='/dashboard' element={<PrivateRoutes/>}>
          <Route path='user' element={lazyLoadPrivateRoutes("Dashboard")}/>

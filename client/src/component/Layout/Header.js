@@ -5,12 +5,14 @@ import { useAuth } from '../../context/auth';
 import { toast } from 'react-toastify';
 import SearchInput from '../Form/SearchInput';
 import useFetch from '../../hooks/useFetch';
+import { useCart } from '../../context/cart';
+import {Badge} from "antd";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
   const {apiData}=useFetch('api/v1/category/get-category');
   const { user } = auth;
-
+  const [cart]=useCart();
   const handleLogout = () => {
     localStorage.removeItem("auth");
     setAuth({ ...auth, user: null, token: "" });
@@ -83,8 +85,10 @@ const Header = () => {
 
                 </>
               }
-              <li className="nav-item">
-                <NavLink to="/cart" className="nav-link">Cart {0}</NavLink>
+              <li className="nav-item mt-2">
+                <Badge count={cart?.length} showZero>
+                <NavLink to="/cart" className="nav-link">Cart</NavLink>
+                </Badge>
               </li>
             </ul>
           </div>

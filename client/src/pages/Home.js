@@ -5,6 +5,8 @@ import { Checkbox, Radio } from "antd";
 import { adminCatrgoryService } from '../services/admin/categoryService';
 import { Prices } from '../component/Prices';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/cart';
+import { toast } from 'react-toastify';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -14,6 +16,7 @@ const Home = () => {
   const [total,setTotal]=useState(0);
   const [page,setPage]=useState(1);
   const navigate=useNavigate();
+  const [cart,setCart]=useCart();
 
   const getTotal=async()=>{
     const {data}=await getTotalCountService()
@@ -115,7 +118,10 @@ const Home = () => {
                 <p className="card-text">{el.description}</p>
                 <p className="card-text">$ {el.price}</p>
                 <button className='btn btn-primary ms-1' onClick={()=>navigate(`/product/${el.slug}`)}>More Details</button>
-                <button className='btn btn-secondary ms-1'>Add To Cart</button>
+                <button className='btn btn-secondary ms-1' onClick={()=>{
+                  setCart([...cart,el]);
+                  toast.success("Item Added To Cart");
+                }}>Add To Cart</button>
               </div>
             </div>
           )}

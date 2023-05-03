@@ -1,6 +1,9 @@
 import express from 'express';
 import {
      forgotPasswordController,
+     getAllOrdersController,
+     getOrdersController,
+     orderStatusController,
      registerController,
      testController,
      updateProfileController,
@@ -33,9 +36,22 @@ router.get('/user-auth',requireSignIn,(req,res)=>{
      res.status(200).send({ok:true})
 });
 
-
 // update profile
 router.put('/profile',requireSignIn,updateProfileController);
+
+//orders
+router.get("/orders", requireSignIn, getOrdersController);
+
+//all orders
+router.get("/all-orders", requireSignIn, isAdmin, getAllOrdersController);
+
+// order status update
+router.put(
+  "/order-status/:orderId",
+  requireSignIn,
+  isAdmin,
+  orderStatusController
+);
 
 
 export default router;

@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import DropIn from "braintree-web-drop-in-react";
 
 // Components
 import WithLayout from '../component/Layout/Layout';
 import { useCart } from '../context/cart';
 import { useAuth } from '../context/auth';
 import { useNavigate } from 'react-router-dom';
+import { paymentService, paymentTokenService } from '../services/payment/paymentService';
+import { toast } from 'react-toastify';
+
 const CartPage = () => {
-  const [auth, setAuth] = useAuth();
+  const [auth] = useAuth();
   const [cart, setCart] = useCart();
   const [clientToken, setClientToken] = useState("");
   const [instance, setInstance] = useState("");
@@ -30,7 +35,7 @@ const CartPage = () => {
     try {
       let total = 0;
       cart?.map((item) => {
-        total = total + item.price;
+       return total = total + item.price;
       });
       return total.toLocaleString("en-US", {
         style: "currency",
@@ -41,6 +46,36 @@ const CartPage = () => {
     }
   };
 
+  // get payment gateway token
+  const getToken = async () => {
+    try {
+      const { data } = await paymentTokenService();
+      setClientToken(data?.clientToken);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getToken();
+  }, [auth?.token]);
+
+  // handle payments
+  const handlePayment = async () => {
+    try {
+      setLoading(true);
+      const { nonce } = await instance.requestPaymentMethod();
+      const { data } = await paymentService(nonce,cart)
+      setLoading(false);
+      localStorage.removeItem("cart");
+      setCart([]);
+      navigate("/dashboard/user/orders");
+      toast.success("Payment Completed Successfully ");
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
   return (
     <div className=" cart-page">
     <div className="row">
@@ -131,7 +166,7 @@ const CartPage = () => {
             </div>
           )}
           <div className="mt-2">
-            {/* {!clientToken || !auth?.token || !cart?.length ? (
+            {!clientToken || !auth?.token || !cart?.length ? (
               ""
             ) : (
               <>
@@ -153,7 +188,7 @@ const CartPage = () => {
                   {loading ? "Processing ...." : "Make Payment"}
                 </button>
               </>
-            )} */}
+            )}
           </div>
         </div>
       </div>

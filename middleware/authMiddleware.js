@@ -15,9 +15,7 @@ export const requireSignIn=async(req,res,next)=>{
 // Admin Access
 export const isAdmin=async(req,res,next)=>{
     try {
-        
         const user=await userModel.findById(req.user._id)
-        console.log(user,'res')
         if(user.role!==1){
             return res.status(401).json({
                 success:false,

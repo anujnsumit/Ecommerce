@@ -3,16 +3,22 @@ import { NavLink, Link } from 'react-router-dom';
 import { GiShoppingBag } from "react-icons/gi";
 import { useAuth } from '../../context/auth';
 import { toast } from 'react-toastify';
+import SearchInput from '../Form/SearchInput';
+import useFetch from '../../hooks/useFetch';
+import { useCart } from '../../context/cart';
+import {Badge} from "antd";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
+  const {apiData}=useFetch('api/v1/category/get-category');
   const { user } = auth;
-
+  const [cart]=useCart();
   const handleLogout = () => {
     localStorage.removeItem("auth");
     setAuth({ ...auth, user: null, token: "" });
     toast.success("Logout successfully!");
   }
+  
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -25,11 +31,35 @@ const Header = () => {
               <GiShoppingBag /> Ecommerce App
             </Link>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              <SearchInput />
               <li className="nav-item">
                 <NavLink to="/" className="nav-link">Home</NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink to="/category" className="nav-link">Category</NavLink>
+              <li className="nav-item dropdown">
+                <Link
+                  className="nav-link dropdown-toggle"
+                  to={"/categories"}
+                  data-bs-toggle="dropdown"
+                >
+                  Categories
+                </Link>
+                <ul className="dropdown-menu">
+                  <li>
+                    <Link className="dropdown-item" to={"/categories"}>
+                      All Categories
+                    </Link>
+                  </li>
+                  {Array.isArray(apiData?.category) &&apiData?.category.map((c) => (
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to={`/category/${c.slug}`}
+                      >
+                        {c.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </li>
               {!user ? <>
                 <li className="nav-item">
@@ -42,21 +72,23 @@ const Header = () => {
                 : <>
                   <li className="nav-item dropdown">
                     <NavLink className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                     {auth?.user?.name}
+                      {auth?.user?.name}
                     </NavLink>
                     <ul className="dropdown-menu">
-                      <li><NavLink className="dropdown-item" to={`/dashboard/${auth.user.role===1?'admin':'user'}`}>Dashboard</NavLink></li>
+                      <li><NavLink className="dropdown-item" to={`/dashboard/${auth.user.role === 1 ? 'admin' : 'user'}`}>Dashboard</NavLink></li>
                       <li>
                         <NavLink onClick={handleLogout} to="/login" className="dropdown-item">Logout</NavLink>
-                     </li>
+                      </li>
                     </ul>
                   </li>
 
-                 
+
                 </>
               }
-              <li className="nav-item">
-                <NavLink to="/cart" className="nav-link">Cart {0}</NavLink>
+              <li className="nav-item mt-2">
+                <Badge count={cart?.length} showZero>
+                <NavLink to="/cart" className="nav-link">Cart</NavLink>
+                </Badge>
               </li>
             </ul>
           </div>

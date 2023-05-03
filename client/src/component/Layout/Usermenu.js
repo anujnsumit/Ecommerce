@@ -13,4 +13,4 @@ const Usermenu = () => {
   )
 }
 
-export default Usermenu
+export default Usermenu;

@@ -1,58 +1,79 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import WithLayout from '../../component/Layout/Layout';
 import AdminMenu from '../../component/Layout/AdminMenu';
-import { adminCatrgoryService } from '../../services/admin/categoryService';
-import { Select } from 'antd';
-import { createProductService } from '../../services/admin/productService';
 import { toast } from 'react-toastify';
-import { Navigate } from 'react-router-dom';
-
+import { useNavigate, useParams } from 'react-router-dom';
+import { Select } from 'antd';
+import {deleteProductService, getSingleProductService, updateProductService } from '../../services/admin/productService';
+import {adminCatrgoryService} from "../../services/admin/categoryService";
 const initalProductState = {
-  name: "",
-  description: "",
-  price: "",
-  quantity: "",
-  shipping: "",
-  photo: ""
-}
-
-const { Option } = Select;
-
-const CreateProduct = () => {
-  const [productState, setProductState] = useState(initalProductState);
-  const [categories, setCategories] = useState([]);
-  const [category, setCategory] = useState(null);
-
-  const getAllCategory = async () => {
-    const { data: { category } } = await adminCatrgoryService();
-    setCategories(category);
+    name: "",
+    description: "",
+    price: "",
+    quantity: "",
+    shipping: "",
+    photo: ""
   }
+  
+  const { Option } = Select;
 
-  useEffect(() => {
-    getAllCategory();
-  }, [])
+const UpdateProduct = () => {
+    const [productState, setProductState] = useState(initalProductState);
+    const [categories, setCategories] = useState([]);
+    const [category, setCategory] = useState(null);
+    const [id,setId]=useState(null);
+    const params=useParams();
 
-  const handleChange = ({ target: { name, value } }) => {
-    setProductState({ ...productState, [name]: value })
-  }
-
-  const handleCreate = async(e) => {
-  e.preventDefault();
-    const productData = new FormData();
-      productData.append("name", productState.name);
-      productData.append("description", productState.description);
-      productData.append("price", productState.price);
-      productData.append("quantity", productState.quantity);
-      productData.append("photo", productState.photo);
-      productData.append("category", category);
-    const {data}=await createProductService(productData);
-    if (data?.success) {
-      toast.success(data?.message);
-      setProductState(initalProductState)
-      Navigate("/dashboard/admin/products");
-    } else{
-      toast.error(data.message);
+    const navigate=useNavigate();
+    // get single product
+    const getSingleProduct=async()=>{
+    const {data}=await getSingleProductService(params.slug);
+    setCategory(data.product.category._id);
+    setId(data.product._id);
+    setProductState(data.product);
     }
+    const getAllCategory = async () => {
+      const { data: { category } } = await adminCatrgoryService();
+      setCategories(category);
+    }
+  
+    useEffect(() => {
+    getSingleProduct()
+      getAllCategory();
+    }, [])
+  
+    const handleChange = ({ target: { name, value } }) => {
+      setProductState({ ...productState, [name]: value })
+    }
+  
+    const updateProduct = async(e) => {
+    e.preventDefault();
+      const productData = new FormData();
+        productData.append("name", productState.name);
+        productData.append("description", productState.description);
+        productData.append("price", productState.price);
+        productData.append("quantity", productState.quantity);
+        productData.append("photo", productState.photo);
+        productData.append("shipping", productState.shipping);
+        productData.append("category", category);
+      const {data}=await updateProductService(id,productData);
+      if (data?.success) {
+        toast.success(data?.message);
+        setProductState(initalProductState);
+        setCategory(null)
+      } else{
+        toast.error(data.message);
+      }
+    }
+
+  const deleteProduct=async(e)=>{
+    const {data}=await deleteProductService(id);
+    if (data?.success) {
+        toast.success(data?.message);
+        navigate("/dashboard/admin/products");
+      } else{
+        toast.error(data.message);
+      }
   }
 
   return (
@@ -60,7 +81,7 @@ const CreateProduct = () => {
       <div className='row'>
         <div className='col-md-3'><AdminMenu /></div>
         <div className='col-md-9'>
-          <h1>Create Product</h1>
+          <h1>Update Product</h1>
           <div className='m-1 w-75'>
             <Select
               bordered={false}
@@ -70,6 +91,7 @@ const CreateProduct = () => {
               className='form-select mb-3'
               onChange={(value) => {
                 setCategory(value)}}
+                value={category}
             >
               {Array.isArray(categories) && categories.map(c => (
                 <Option key={c._id} value={c._id}>{c.name}</Option>
@@ -146,8 +168,13 @@ const CreateProduct = () => {
             </Select>
           </div>
           <div className="mb-3">
-            <button className="btn btn-primary" onClick={handleCreate}>
-              CREATE PRODUCT
+            <button className="btn btn-primary" onClick={updateProduct}>
+              UPDATE PRODUCT
+            </button>
+          </div>
+          <div className="mb-3">
+            <button className="btn btn-danger" onClick={deleteProduct}>
+              DELETE PRODUCT
             </button>
           </div>
         </div>
@@ -156,4 +183,4 @@ const CreateProduct = () => {
   )
 }
 
-export default WithLayout(CreateProduct);
+export default WithLayout(UpdateProduct);
